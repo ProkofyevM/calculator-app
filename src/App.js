@@ -19,14 +19,26 @@ export const App = () => {
    const [isResult, setIsResult] = useState(false)
 
    const handleClickOperand1 = num => {
+
       if (operator) {
-         setOperand2(acc => acc + num)
+         setOperand2(acc => {
+            if (acc === '0') {
+               return num
+            }
+            return acc + num
+            })
       } else {
-         setOperand1(acc => acc + num)
+         setOperand1(acc => {
+         if (acc === '0') {
+            return num
+         }
+         return acc + num
+         })
       }
    }
 
    const handleClickOperator = operator => {
+      setIsResult(false)
       if (operand1) {
          setOperator(operator)
       }
