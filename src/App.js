@@ -5,7 +5,7 @@ import React from 'react'
 const Button = ({ number, onClick }) => {
    console.log(number, onClick)
    return (
-      <button onClick={onClick}>
+      <button  onClick={onClick}>
          {number}
       </button>
    )
