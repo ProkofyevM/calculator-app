@@ -3,22 +3,15 @@ import { useState } from 'react'
 import React from 'react'
 import { Button } from './Button/Button'
 
-
-
 export const App = () => {
-	const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+	const numbers = ['c', '+', '-', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '=']
 	const [operand1, setOperand1] = useState('')
 	const [operator, setOperator] = useState('')
 	const [operand2, setOperand2] = useState('')
 	const [isResult, setIsResult] = useState(false)
 
 	const handleClickOperand1 = (num) => {
-		if (isResult) {
-			setOperand1(num)
-			setOperator('')
-			setOperand2('')
-			setIsResult(false)
-		} else if (operator) {
+		if (operator) {
 			setOperand2((acc) => {
 				if (acc === '0') {
 					return num
@@ -72,6 +65,18 @@ export const App = () => {
 		}
 	}
 
+	const handleClick = (num) => {
+		if (num === '=') {
+			handleClickEqual()
+		} else if (num === '+' || num === '-') {
+			handleClickOperator(num)
+		} else if (num === 'c') {
+			handleClickCancel()
+		} else {
+			handleClickOperand1(num)
+		}
+	}
+
 	return (
 		<div className="app">
 			<div className="calc">
@@ -80,25 +85,14 @@ export const App = () => {
 					value={operand1 + operator + operand2}
 					className={isResult ? 'inp result' : 'inp'}
 				></input>
-				<button className="btn1" onClick={() => handleClickCancel()}>
-					c
-				</button>
-				<button className="btn1" onClick={() => handleClickOperator('+')}>
-					+
-				</button>
-				<button className="btn1" onClick={() => handleClickOperator('-')}>
-					-
-				</button>
 				{numbers.map((number) => (
 					<Button
 						key={number}
 						number={number}
-						onClick={() => handleClickOperand1(number)}
+						className={number === '=' ? 'btn' : 'btn2'}
+						onClick={() => handleClick(number)}
 					/>
 				))}
-				<button className="btn1 btn" onClick={handleClickEqual}>
-					=
-				</button>
 			</div>
 		</div>
 	)

@@ -1,9 +1,9 @@
+import '../App.css'
 
-
-export const Button = ({ number, onClick }) => {
+export const Button = ({ number, onClick, className }) => {
 
    return (
-      <button  onClick={onClick}>
+      <button className = {className} onClick={onClick}>
          {number}
       </button>
    )
